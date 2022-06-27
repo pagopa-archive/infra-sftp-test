@@ -275,6 +275,7 @@ stages:
                     valueFile: "$(Pipeline.Workspace)/4gb/values-${{ lower(variables.environment) }}.yaml"
                     install: true
                     waitForExecution: true
+                    arguments: "--timeout 3m0s --debug"
       - deployment: 'Deploy_to_${{ variables.environment }}'
         displayName: 'Deploy to ${{ variables.environment }} K8S 1mb'
         pool:
@@ -313,5 +314,4 @@ stages:
                     valueFile: "$(Pipeline.Workspace)/1mb/values-${{ lower(variables.environment) }}.yaml"
                     install: true
                     waitForExecution: true
-                    arguments: "--timeout 3m0s --debug"
                     arguments: "--timeout 3m0s --debug"
