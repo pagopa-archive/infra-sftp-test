@@ -1,0 +1,54 @@
+microservice-chart:
+  namespace: sftp
+
+  image:
+    repository: cstardcommonacr.azurecr.io/infrasftptest
+    tag: "latest"
+
+      # livenessProbe:
+      #   httpGet:
+      #     path: /api/live
+      #     port: 80
+
+      # readinessProbe:
+      #   httpGet:
+      #     path: /api/ready
+      #     port: 80
+
+  ingress:
+    create: false
+
+  podSecurityContext:
+    runAsUser: 10000
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
+
+  resources:
+    requests:
+      memory: 20Mi
+      cpu: 100m
+    limits:
+      memory: 512Mi
+      cpu: 1000m
+
+  envConfig:
+    FUNCTION_WORKER_RUNTIME: dotnet
+    TIME_TRIGGER: "0 * * * * *"
+    FunctionName: SftpTest1MB
+    FileSizeInMb: 1
+    Region: North Europe
+    SftpHost: cstardsftp.blob.core.windows.net
+
+  envSecret:
+    APPINSIGHTS_INSTRUMENTATIONKEY: infra-sftp-test-appinsights-instrumentationkey
+    AzureWebJobsStorage: infra-sftp-test-azurewebjobsstorage
+    SftpUsername: infra-sftp-test-username
+    SftpPassword: infra-sftp-test-password
+
+  keyvault:
+    name: "cstar-d-idpay-kv"
+    tenantId: "7788edaf-0346-4068-9d79-c868aed15b3d"
