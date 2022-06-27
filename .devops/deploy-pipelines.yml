@@ -2,12 +2,6 @@
 # Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-parameters:
-  - name: 'skipBuild'
-    displayName: 'Check this flag to skip build and proceed to deploy a docker image previously built'
-    type: boolean
-    default: false
-
 resources:
   - repo: self
 
@@ -16,6 +10,11 @@ variables:
   imageRepository: '$(K8S_IMAGE_REPOSITORY_NAME)'
   deployNamespace: '$(DEPLOY_NAMESPACE)'
   helmReleaseName : '$(HELM_RELEASE_NAME)'
+  environment: '$(TF_ENVIRONMENT)'
+  dockerRegistryServiceConnection: '$(TF_DOCKERREGISTRYSERVICECONNECTION)'
+  kubernetesServiceConnection: '$(TF_KUBERNETESSERVICECONNECTION)'
+  containerRegistry: '$(TF_CONTAINERREGISTRY)'
+  selfHostedAgentPool: '$(TF_SELFHOSTEDAGENTPOOL)'
 
   # ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/release-dev') }}:
   #   environment: 'DEV'
@@ -45,7 +44,6 @@ variables:
 stages:
   - stage: 'Build'
     displayName: 'Build_and_Publish_to_${{ variables.environment }}'
-    condition: and(succeeded(), not(${{ parameters.skipBuild }} ))
     jobs:
       - job: Build
         displayName: Build
