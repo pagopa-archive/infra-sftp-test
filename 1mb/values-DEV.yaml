@@ -18,15 +18,6 @@ microservice-chart:
   ingress:
     create: false
 
-  podSecurityContext:
-    runAsUser: 10000
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-        - ALL
-    seccompProfile:
-      type: RuntimeDefault
-
   resources:
     requests:
       memory: 20Mi
