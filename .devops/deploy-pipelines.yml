@@ -67,7 +67,7 @@ stages:
     displayName: 'Publish_artifact_Helm'
     dependsOn: ['build']
     jobs:
-      - job: Publish_artifact_helm
+      - job: Publish_artifact_helm_1mb
         displayName: Publish_artifact_helm_1mb
         pool:
           vmImage: $(vmImageNameDefault)
@@ -79,7 +79,7 @@ stages:
               targetPath: '$(Build.Repository.LocalPath)/1mb'
               artifact: '1mb'
               publishLocation: 'pipeline'
-      - job: Publish_artifact_helm
+      - job: Publish_artifact_helm_100mb
         displayName: Publish_artifact_helm_100mb
         pool:
           vmImage: $(vmImageNameDefault)
@@ -91,7 +91,7 @@ stages:
               targetPath: '$(Build.Repository.LocalPath)/100mb'
               artifact: '100mb'
               publishLocation: 'pipeline'
-      - job: Publish_artifact_helm
+      - job: Publish_artifact_helm_1gb
         displayName: Publish_artifact_helm_1gb
         pool:
           vmImage: $(vmImageNameDefault)
@@ -103,7 +103,7 @@ stages:
               targetPath: '$(Build.Repository.LocalPath)/1gb'
               artifact: '1gb'
               publishLocation: 'pipeline'
-      - job: Publish_artifact_helm
+      - job: Publish_artifact_helm_4g
         displayName: Publish_artifact_helm_4gb
         pool:
           vmImage: $(vmImageNameDefault)
@@ -120,7 +120,7 @@ stages:
     displayName: 'Deploy to ${{ variables.environment }} K8S'
     dependsOn: ['publish_artifact_helm']
     jobs:
-      - deployment: 'Deploy_to_${{ variables.environment }}'
+      - deployment: 'Deploy_to_${{ variables.environment }}_1mb'
         displayName: 'Deploy to ${{ variables.environment }} K8S 1mb'
         pool:
           name: $(selfHostedAgentPool)
@@ -159,7 +159,7 @@ stages:
                     install: true
                     waitForExecution: true
                     arguments: "--timeout 3m0s --debug"
-      - deployment: 'Deploy_to_${{ variables.environment }}'
+      - deployment: 'Deploy_to_${{ variables.environment }}_100mb'
         displayName: 'Deploy to ${{ variables.environment }} K8S 100mb'
         pool:
           name: $(selfHostedAgentPool)
@@ -198,7 +198,7 @@ stages:
                     install: true
                     waitForExecution: true
                     arguments: "--timeout 3m0s --debug"
-      - deployment: 'Deploy_to_${{ variables.environment }}'
+      - deployment: 'Deploy_to_${{ variables.environment }}_1gb'
         displayName: 'Deploy to ${{ variables.environment }} K8S 1gb'
         pool:
           name: $(selfHostedAgentPool)
@@ -237,7 +237,7 @@ stages:
                     install: true
                     waitForExecution: true
                     arguments: "--timeout 3m0s --debug"
-      - deployment: 'Deploy_to_${{ variables.environment }}'
+      - deployment: 'Deploy_to_${{ variables.environment }}_4gb'
         displayName: 'Deploy to ${{ variables.environment }} K8S 4gb'
         pool:
           name: $(selfHostedAgentPool)
