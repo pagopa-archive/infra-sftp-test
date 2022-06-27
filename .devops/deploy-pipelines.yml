@@ -118,7 +118,7 @@ stages:
     displayName: 'Deploy to ${{ variables.environment }} K8S'
     dependsOn: ['publish_artifact_helm']
     jobs:
-      - deployment: 'Deploy_to_${{ variables.environment }}_1mb'
+      - deployment: 'Deploy_to_${{ variables['environment'] }}_1mb'
         displayName: 'Deploy to ${{ variables.environment }} K8S 1mb'
         pool:
           name: $(selfHostedAgentPool)
