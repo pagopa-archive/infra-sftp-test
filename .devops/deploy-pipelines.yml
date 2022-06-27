@@ -43,7 +43,7 @@ variables:
 
 stages:
   - stage: 'Build'
-    displayName: 'Build_and_Publish_to_${{ variables.environment }}'
+    displayName: 'Build_and_Publish'
     jobs:
       - job: Build
         displayName: Build
@@ -51,7 +51,7 @@ stages:
           vmImage: $(vmImageNameDefault)
         steps:
           - task: Docker@2
-            displayName: 'Publish_image_to_${{ variables.environment }}'
+            displayName: 'Publish_image'
             condition: succeeded()
             inputs:
               containerRegistry: '$(dockerRegistryServiceConnection)'
@@ -115,11 +115,11 @@ stages:
                 #        publishLocation: 'pipeline'
 
   - stage: 'deploy'
-    displayName: 'Deploy to ${{ variables.environment }} K8S'
+    displayName: 'Deploy to K8S'
     dependsOn: ['publish_artifact_helm']
     jobs:
-      - deployment: 'Deploy_to_${{ variables.environment }}_1mb'
-        displayName: 'Deploy to ${{ variables.environment }} K8S 1mb'
+      - deployment: 'Deploy_1mb'
+        displayName: 'Deploy to K8S 1mb'
         pool:
           name: $(selfHostedAgentPool)
         environment: '$(environment)'
@@ -157,7 +157,7 @@ stages:
                     install: true
                     waitForExecution: true
                     arguments: "--timeout 3m0s --debug"
-                      #- deployment: 'Deploy_to_${{ variables.environment }}_100mb'
+                      #- deployment: 'Deploy_100mb'
                       #  displayName: 'Deploy to ${{ variables.environment }} K8S 100mb'
                       #  pool:
                       #    name: $(selfHostedAgentPool)
