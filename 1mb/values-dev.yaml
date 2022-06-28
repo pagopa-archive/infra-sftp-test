@@ -1,21 +1,14 @@
 microservice-chart:
-  namespace: sftp
+  namespace: tae
 
   image:
     repository: cstardcommonacr.azurecr.io/infrasftptest
     tag: "latest"
 
-      # livenessProbe:
-      #   httpGet:
-      #     path: /api/live
-      #     port: 80
-
-      # readinessProbe:
-      #   httpGet:
-      #     path: /api/ready
-      #     port: 80
-
   ingress:
+    create: false
+
+  service:
     create: false
 
   resources:
@@ -30,7 +23,7 @@ microservice-chart:
     FUNCTION_WORKER_RUNTIME: dotnet
     TIME_TRIGGER: "0 * * * * *"
     FunctionName: SftpTest1MB
-    FileSizeInMb: 1
+    FileSizeInMb: "1"
     Region: North Europe
     SftpHost: cstardsftp.blob.core.windows.net
 
@@ -41,5 +34,5 @@ microservice-chart:
     SftpPassword: infra-sftp-test-password
 
   keyvault:
-    name: "cstar-d-idpay-kv"
-    tenantId: "7788edaf-0346-4068-9d79-c868aed15b3d"
+    name: cstar-d-tae-kv
+    tenantId: 7788edaf-0346-4068-9d79-c868aed15b3d
