@@ -16,14 +16,14 @@ microservice-chart:
       memory: 20Mi
       cpu: 100m
     limits:
-      memory: 512Mi
+      memory: 1540Mi
       cpu: 1000m
 
   envConfig:
     FUNCTION_WORKER_RUNTIME: dotnet
-    TIME_TRIGGER: "0 * * * * *"
-    FunctionName: sftp1mb-test
-    FileSizeInMb: "1"
+    TIME_TRIGGER: "0 0 3 * * *"
+    FunctionName: sftp4gb-test
+    FileSizeInMb: "4096"
     Region: West Europe
     SftpHost: cstardsftp.blob.core.windows.net
 

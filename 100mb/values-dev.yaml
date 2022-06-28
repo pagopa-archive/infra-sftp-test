@@ -21,9 +21,9 @@ microservice-chart:
 
   envConfig:
     FUNCTION_WORKER_RUNTIME: dotnet
-    TIME_TRIGGER: "0 * * * * *"
-    FunctionName: sftp1mb-test
-    FileSizeInMb: "1"
+    TIME_TRIGGER: "0 */5 * * * *"
+    FunctionName: sftp100mb-test
+    FileSizeInMb: "100"
     Region: West Europe
     SftpHost: cstardsftp.blob.core.windows.net
 
