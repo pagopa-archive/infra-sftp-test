@@ -20,6 +20,7 @@ microservice-chart:
       cpu: 1000m
 
   envConfig:
+    WEBSITE_SITE_NAME: 'sftp-test-1gb' # required to show cloud role name in application insights
     FUNCTION_WORKER_RUNTIME: dotnet
     TIME_TRIGGER: "0 */30 * * * *"
     FunctionName: sftp1gb-test
