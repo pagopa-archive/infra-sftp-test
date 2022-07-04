@@ -20,6 +20,7 @@ microservice-chart:
       cpu: 1000m
 
   envConfig:
+    WEBSITE_SITE_NAME: 'sftp-test-4gb' # required to show cloud role name in application insights
     FUNCTION_WORKER_RUNTIME: dotnet
     TIME_TRIGGER: "0 0 * * * *"
     FunctionName: sftp4gb-test
@@ -28,7 +29,6 @@ microservice-chart:
     SftpHost: cstardsftp.blob.core.windows.net
 
   envSecret:
-    WEBSITE_SITE_NAME: 'sftp-test-4gb' # required to show cloud role name in application insights
     APPINSIGHTS_INSTRUMENTATIONKEY: infra-sftp-test-appinsights-instrumentationkey
     AzureWebJobsStorage: infra-sftp-test-azurewebjobsstorage
     SftpUsername: infra-sftp-test-username
