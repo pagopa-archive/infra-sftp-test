@@ -13,9 +13,7 @@
       }
     },
     "logLevel": {
-      "default": "Information",
-      "PagoPA.Liveness": "Error",
-      "PagoPA.Readiness": "Error"
+      "default": "Information"
     }
   }
 }

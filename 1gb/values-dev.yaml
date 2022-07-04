@@ -21,7 +21,7 @@ microservice-chart:
 
   envConfig:
     FUNCTION_WORKER_RUNTIME: dotnet
-    TIME_TRIGGER: "0 0 * * * *"
+    TIME_TRIGGER: "0 */30 * * * *"
     FunctionName: sftp1gb-test
     FileSizeInMb: "1024"
     Region: West Europe
