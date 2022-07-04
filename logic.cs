@@ -10,7 +10,7 @@ namespace PagoPA
   [Serializable()]
   public class CorruptedFileException : Exception
   {
-    public CorruptedFileException() : base() {}
+    public CorruptedFileException(string msg) : base(msg) {}
   }
 
   public class Test
@@ -68,8 +68,8 @@ namespace PagoPA
               uploadFs.Close();
             }
 
-            log.LogDebug($"[DEBUG] Deleting {filename} file..");
-            client.DeleteFile(filename);
+            // log.LogDebug($"[DEBUG] Deleting {filename} file..");
+            // client.DeleteFile(filename);
 
             client.Disconnect();
           }
@@ -78,7 +78,7 @@ namespace PagoPA
 
       if (uploadChecksum != downloadChecksum)
       {
-        throw new CorruptedFileException();
+        throw new CorruptedFileException($"{filename} - upload: [{uploadChecksum}] download: [{downloadChecksum}]");
       }
     }
 

@@ -62,10 +62,10 @@ namespace PagoPA
         _log.LogInformation("[INFO] Success..");
         availability.Success = true;
       }
-      catch (CorruptedFileException)
+      catch (CorruptedFileException ex)
       {
         _log.LogInformation("[INFO] Fail..");
-        availability.Message = "Checksums don't match";
+        availability.Message = ex.Message;
         throw;
       }
       catch (Exception ex)
