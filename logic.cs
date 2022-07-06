@@ -29,7 +29,7 @@ namespace PagoPA
       DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
 
       this.filesize = filesize;
-      this.filename = now.ToString("yyyyMMddHHmmssfff");
+      this.filename = now.ToString($"{filesize}-yyyyMMddHHmmssfff");
       this.rnd = new Random();
     }
 
